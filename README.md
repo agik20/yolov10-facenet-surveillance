@@ -86,3 +86,59 @@ This project presents an AI-based surveillance system for automatically locating
   User provides NIK → reference face image retrieved from database → embeddings generated → stored for comparison.  
 - **Metadata Storage:**  
   Detection timestamp, CCTV ID, location, and cropped face stored for traceability. 
+
+## 📈 Evaluation Results
+
+The system was evaluated in two settings: **CPU (confusion matrix visualization)** and **GPU (JSON-based metrics report)**.
+
+---
+
+### 1. Confusion Matrix (CPU)
+The confusion matrix below illustrates the classification results of the **Face Recognition model** when executed on CPU.  
+
+Each row represents the **true class**, and each column represents the **predicted class**.  
+A perfect diagonal line indicates that the classifier correctly recognized all faces without misclassifications.
+
+<img width="1600" height="900" alt="evaluation_report" src="https://github.com/user-attachments/assets/46be7671-8ed9-427f-b726-b354085f4026" />
+
+*Result:* The confusion matrix shows perfect classification performance, with no off-diagonal misclassifications.
+
+---
+
+### 2. Metrics Report (GPU)
+On GPU execution, the system was able to achieve **perfect performance** with the following metrics:
+
+```json
+{
+  "accuracy": 1.0,
+  "macro_avg": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "weighted_avg": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "per_class": {
+    "abyan": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 252
+    },
+    "agi": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 253
+    },
+    "apis": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 252
+    }
+  }
+}
