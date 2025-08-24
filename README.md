@@ -1,6 +1,4 @@
-# yolov10-facenet-surveillance
-
-# CCTV-Based Suspect Tracking System
+# Criminal Suspect Localization Using CCTV-Based Face Recognition and Object Detection
 
 **Team Name:** Gotham  
 **Members:**  
@@ -9,7 +7,6 @@
 - Muhammad Hafidz Hidayatullah (hafidzhidayatullah1012@gmail.com)  
 
 **Origin:** Universitas Islam Indonesia (UII)  
-**Repository Link:** gotham  
 
 ---
 
