@@ -148,3 +148,7 @@ On GPU execution, the system was able to achieve **perfect performance** with th
     }
   }
 }
+```
+
+## Conclusion
+This project successfully demonstrates the integration of advanced computer vision techniques for automatically identifying suspect locations through CCTV. The system employs YOLOv10s for Face Detection, ensuring accurate identification of human faces in real-time video streams. Once a face is detected, FaceNet combined with SVM is used for Face Recognition, enabling reliable verification of suspect identities based on embeddings comparison. The automated workflow reduces the manual workload of law enforcement officers, increases tracking efficiency, and provides timely information on suspect locations. Moreover, the system holds strong potential for future development, including large-scale deployment across CCTV networks and integration with national databases to further enhance public safety.
