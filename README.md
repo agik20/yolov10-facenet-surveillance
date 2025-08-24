@@ -6,32 +6,25 @@
 - Muhammad Abyan Nurfajarizqi (muhammadabyan077@gmail.com)  
 - Muhammad Hafidz Hidayatullah (hafidzhidayatullah1012@gmail.com)  
 
-**Origin:** Universitas Islam Indonesia (UII)  
+**Origin:** Islamic University of Indonesia
 
 ---
 
 ## 📌 Project Description
 “Identifying Suspect Locations Automatically Using Face Detection and Face Recognition”
 
-This project presents an AI-based surveillance system for automatically locating suspects through CCTV.  
-The system applies **YOLOv10s** for real-time face detection and **FaceNet + SVM** for accurate face recognition using facial embeddings.  
-By integrating suspect data via **National Identification Numbers (NIK)**, the system automates monitoring, reduces officer workload, and enhances tracking efficiency.  
-Designed for scalability, it offers a practical and innovative solution to strengthen law enforcement and public safety.
+This project provides significant benefits in supporting law enforcement through the use of Face Detection and Face Recognition technology on CCTV to track the location of suspects more quickly and accurately. In addition, the system is capable of automating the monitoring process that was previously performed manually, thereby reducing the workload of officers and improving tracking efficiency. From a sustainability perspective, the system has the potential to be further expanded by integrating with a larger network of CCTV cameras across various regions in Indonesia and synchronizing with the national database.
 
 ---
 
 ## 📖 Abstract
-The system leverages modern computer vision and deep learning models to process CCTV footage in real time:  
-- **YOLOv10s** → Detects faces from CCTV video streams.  
-- **FaceNet + SVM** → Recognizes suspects by comparing embeddings to reference data.  
-- **Database Integration** → Matches recognized faces with NIK-based records.  
-- **Web Dashboard** → Displays detections, location, and history.  
-
-The result is a system capable of **automated suspect identification and localization** that supports law enforcement operations.
+This project presents an AI-based surveillance system for automatically locating suspects through CCTV. The system applies YOLOv10s for real-time face detection and FaceNet with SVM for accurate face recognition using embeddings comparison. By integrating suspect data via National Identification Numbers (NIK), the system automates monitoring, reduces officer workload, and enhances tracking efficiency. Designed for scalability, it offers a practical and innovative solution to strengthen law enforcement and public safety.
 
 ---
 
 ## ⚙️ System Workflow
+<img width="810" height="609" alt="gotham drawio" src="https://github.com/user-attachments/assets/3dd02f96-f20e-4e9c-9ecb-8ce60053bd90" />
+
 1. **Input:** User provides suspect’s **NIK**.  
 2. **Database Retrieval:** System retrieves reference face image from database.  
 3. **CCTV Analysis:**  
