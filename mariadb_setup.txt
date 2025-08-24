@@ -1,0 +1,13 @@
+Get Latest Packages: sudo apt-get update
+Install Apache: sudo apt-get install apache2 -y
+Install PHP: sudo apt install libapache2-mod-php
+Change Dir to Public Html: cd /var/www
+Grant ownership to gotham user: sudo chown gotham: html
+Install MySQL: sudo apt install mariadb-server php-mysql -y
+Create User Query: CREATE USER 'gotham'@'localhost' IDENTIFIED BY 'gotham';
+Grant User Permissions: GRANT ALL PRIVILEGES ON . to 'gotham'@'localhost' WITH GRANT OPTION;
+Install PHPMyAdmin: sudo apt-get install phpmyadmin
+Edit Apache Config: sudo nano /etc/apache2/apache2.conf
+Add PHP Config to Apache: Include /etc/phpmyadmin/apache.conf
+Restart ApacheService: sudo /etc/init.d/apache2 restart
+Reboot Server: sudo reboot

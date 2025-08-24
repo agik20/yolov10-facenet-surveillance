@@ -1,0 +1,6 @@
+Install nodejs: sudo apt install -y nodejs npm
+Go to the project folder: cd /var/www/html/gotham/watcher
+Initialize Node.js project: npm init -y
+Install dependencies: npm install chokidar mysql2
+Create a watcher.js file at /var/www/html/gotham/watcher/watcher.js
+Run the script: node watcher.js
