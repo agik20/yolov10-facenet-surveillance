@@ -15,6 +15,13 @@
 
 This project provides significant benefits in supporting law enforcement through the use of Face Detection and Face Recognition technology on CCTV to track the location of suspects more quickly and accurately. In addition, the system is capable of automating the monitoring process that was previously performed manually, thereby reducing the workload of officers and improving tracking efficiency. From a sustainability perspective, the system has the potential to be further expanded by integrating with a larger network of CCTV cameras across various regions in Indonesia and synchronizing with the national database.
 
+By leveraging **National Identification Numbers (NIK)** as an identity anchor, the system retrieves reference images from a database, compares them with detected faces, and outputs real-time suspect identification with associated CCTV location and timestamp.  
+
+⚠️ **Note on NIK Usage:**  
+The NIK integration described here is a **conceptual design only**.  
+This project does **not** connect to real government databases. Instead, a **mock database** of individual reference images is used to simulate the process.  
+Actual national ID data remains under the authority of government institutions.  
+
 ---
 
 ## 📖 Abstract
