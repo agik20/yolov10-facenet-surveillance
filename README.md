@@ -48,7 +48,41 @@ This project presents an AI-based surveillance system for automatically locating
 
 ---
 
-## 📊 Project Architecture
-```text
-Input CCTV → YOLOv10s (Face Detection) → FaceNet (Embeddings) → SVM (Classification) 
-   → Match with Database (NIK) → Website Dashboard (Result + History)
+## ⚙️ Methodology & Models
+
+### 1. Face Detection – **YOLOv10s**
+- **Why YOLOv10s?**
+  - Lightweight, optimized for real-time inference.
+  - Balances accuracy and speed, ideal for CCTV video feeds.
+- **Role in Pipeline:** Detects bounding boxes for all visible faces in each CCTV frame.
+- **Input:** CCTV video stream frame-by-frame.  
+- **Output:** Cropped face regions with bounding box coordinates.  
+
+---
+
+### 2. Face Recognition – **FaceNet**
+- **Why FaceNet?**
+  - Produces a 128-dimensional embedding vector for each face.
+  - State-of-the-art in robust identity representation.  
+  - Embeddings allow **cosine similarity / Euclidean distance** comparison.  
+- **Process:**
+  - Each detected face → converted into embeddings via FaceNet.
+  - Embeddings stored in database for known suspects.  
+
+---
+
+### 3. Classification – **Support Vector Machine (SVM)**
+- **Why SVM?**
+  - Effective for classification tasks with high-dimensional embeddings.
+  - Performs well with limited labeled training data (suspect face images).
+- **Process:**
+  - Embeddings → classified against reference embeddings.
+  - Output: **Match / No Match** decision.  
+
+---
+
+### 4. Database Integration
+- **NIK-based Search:**  
+  User provides NIK → reference face image retrieved from database → embeddings generated → stored for comparison.  
+- **Metadata Storage:**  
+  Detection timestamp, CCTV ID, location, and cropped face stored for traceability. 
