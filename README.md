@@ -19,8 +19,7 @@ By leveraging **National Identification Numbers (NIK)** as an identity anchor, t
 
 ⚠️ **Note on NIK Usage:**  
 The NIK integration described here is a **conceptual design only**.  
-This project does **not** connect to real government databases. Instead, a **mock database** of individual reference images is used to simulate the process.  
-Actual national ID data remains under the authority of government institutions.  
+This project does **not** connect to real government databases. Instead, a **mock database** of individual reference images is used to simulate the process. Actual national ID data remains under the authority of government institutions.  
 
 ---
 
