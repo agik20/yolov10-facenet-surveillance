@@ -1,119 +1,88 @@
 # Criminal Suspect Localization Using CCTV-Based Face Recognition and Object Detection
 
+![YOLOv10](https://img.shields.io/badge/YOLOv10-Face%20Detection-00FFFF?style=for-the-badge)
+![FaceNet](https://img.shields.io/badge/FaceNet-Face%20Recognition-FF00FF?style=for-the-badge)
+![SVM](https://img.shields.io/badge/SVM-Classification-FFFF00?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-Real--time-00FF00?style=for-the-badge)
+
 **Team Name:** Gotham  
-**Members:**  
-- Ardutra Agi Ginting (ardutraa40@gmail.com)  
-- Muhammad Abyan Nurfajarizqi (muhammadabyan077@gmail.com)  
-- Muhammad Hafidz Hidayatullah (hafidzhidayatullah1012@gmail.com)  
+**Members:**
+- Ardutra Agi Ginting (ardutraa40@gmail.com)
+- Muhammad Abyan Nurfajarizqi (muhammadabyan077@gmail.com)
+- Muhammad Hafidz Hidayatullah (hafidzhidayatullah1012@gmail.com)
 
 **Origin:** Islamic University of Indonesia
 
 ---
 
-## 📌 Project Description
-“Identifying Suspect Locations Automatically Using Face Detection and Face Recognition”
+## 📌 Project Overview
 
-This project provides significant benefits in supporting law enforcement through the use of Face Detection and Face Recognition technology on CCTV to track the location of suspects more quickly and accurately. In addition, the system is capable of automating the monitoring process that was previously performed manually, thereby reducing the workload of officers and improving tracking efficiency. From a sustainability perspective, the system has the potential to be further expanded by integrating with a larger network of CCTV cameras across various regions in Indonesia and synchronizing with the national database.
+**"Identifying Suspect Locations Automatically Using Face Detection and Face Recognition"**
 
-By leveraging **National Identification Numbers (NIK)** as an identity anchor, the system retrieves reference images from a database, compares them with detected faces, and outputs real-time suspect identification with associated CCTV location and timestamp.  
+This project provides significant benefits in supporting law enforcement through the use of Face Detection and Face Recognition technology on CCTV to track the location of suspects more quickly and accurately. The system automates the monitoring process that was previously performed manually, reducing officer workload and improving tracking efficiency.
 
-⚠️ **Note on NIK Usage:**  
-The NIK integration described here is a **conceptual design only**.  
-This project does **not** connect to real government databases. Instead, a **mock database** of individual reference images is used to simulate the process. Actual national ID data remains under the authority of government institutions.  
+> ⚠️ **Important Note on NIK Usage:**  
+> The NIK integration described here is a **conceptual design only**. This project does **not** connect to real government databases. Instead, a **mock database** of individual reference images is used to simulate the process. Actual national ID data remains under the authority of government institutions.
 
 ---
 
 ## 📖 Abstract
-This project presents an AI-based surveillance system for automatically locating suspects through CCTV. The system applies YOLOv10s for real-time face detection and FaceNet with SVM for accurate face recognition using embeddings comparison. By integrating suspect data via National Identification Numbers (NIK), the system automates monitoring, reduces officer workload, and enhances tracking efficiency. Designed for scalability, it offers a practical and innovative solution to strengthen law enforcement and public safety.
+
+This project presents an AI-based surveillance system for automatically locating suspects through CCTV. The system applies YOLOv10s for real-time face detection and FaceNet with SVM for accurate face recognition using embeddings comparison. By integrating suspect data via National Identification Numbers (NIK), the system automates monitoring, reduces officer workload, and enhances tracking efficiency.
 
 ---
 
-## ⚙️ System Workflow
-<img width="810" height="609" alt="gotham drawio" src="https://github.com/user-attachments/assets/3dd02f96-f20e-4e9c-9ecb-8ce60053bd90" />
+## 🏗️ System Architecture
 
-1. **Input:** User provides suspect’s **NIK**.  
-2. **Database Retrieval:** System retrieves reference face image from database.  
-3. **CCTV Analysis:**  
-   - YOLOv10s detects faces from each CCTV frame.  
-   - Detected faces → processed by FaceNet to generate embeddings.  
-   - SVM classifier compares embeddings against the reference.  
-4. **Decision:**  
-   - If similarity score > threshold → Match confirmed.  
-   - Metadata (timestamp, CCTV location) stored in database.  
-5. **Output:**  
-   - Cropped face + location displayed on website.  
-   - History of detections logged for future queries.  
+```mermaid
+graph TD
+    A[User Input: NIK] --> B[Database Retrieval]
+    B --> C[Reference Image]
+    C --> D[FaceNet Embeddings]
+    D --> E[SVM Classification]
+    
+    F[CCTV Stream] --> G[YOLOv10s Face Detection]
+    G --> H[Detected Faces]
+    H --> I[FaceNet Embeddings]
+    I --> E
+    
+    E --> J[Match Decision]
+    J --> K[Store Metadata]
+    K --> L[Web Interface Output]
+```
 
----
-
-## 🖥️ Web Application Features
-- **Home Page** → Overview of the system.  
-- **CCTV Page** → Real-time streaming from multiple CCTV cameras with location selection.  
-- **Search Page** → Search by NIK to quickly identify suspect appearances.  
-- **History Page** → Complete record of past detections with filtering options.  
-
----
-
-## ⚙️ Methodology & Models
+## ⚙️ Technical Implementation
 
 ### 1. Face Detection – **YOLOv10s**
-- **Why YOLOv10s?**
-  - Lightweight, optimized for real-time inference.
-  - Balances accuracy and speed, ideal for CCTV video feeds.
-- **Role in Pipeline:** Detects bounding boxes for all visible faces in each CCTV frame.
-- **Input:** CCTV video stream frame-by-frame.  
-- **Output:** Cropped face regions with bounding box coordinates.  
-
----
+- **Purpose:** Real-time face detection in CCTV feeds
+- **Advantages:** Lightweight, optimized for real-time inference
+- **Input:** CCTV video stream frame-by-frame
+- **Output:** Cropped face regions with bounding box coordinates
 
 ### 2. Face Recognition – **FaceNet**
-- **Why FaceNet?**
-  - Produces a 128-dimensional embedding vector for each face.
-  - State-of-the-art in robust identity representation.  
-  - Embeddings allow **cosine similarity / Euclidean distance** comparison.  
-- **Process:**
-  - Each detected face → converted into embeddings via FaceNet.
-  - Embeddings stored in database for known suspects.  
-
----
+- **Purpose:** Generate 128-dimensional embedding vectors for each face
+- **Advantages:** State-of-the-art identity representation
+- **Process:** Converts detected faces into comparable embeddings
 
 ### 3. Classification – **Support Vector Machine (SVM)**
-- **Why SVM?**
-  - Effective for classification tasks with high-dimensional embeddings.
-  - Performs well with limited labeled training data (suspect face images).
-- **Process:**
-  - Embeddings → classified against reference embeddings.
-  - Output: **Match / No Match** decision.  
-
----
+- **Purpose:** Match detection using embedding comparisons
+- **Advantages:** Effective with high-dimensional data
+- **Output:** Match/No Match decision with confidence score
 
 ### 4. Database Integration
-- **NIK-based Search:**  
-  User provides NIK → reference face image retrieved from database → embeddings generated → stored for comparison.  
-- **Metadata Storage:**  
-  Detection timestamp, CCTV ID, location, and cropped face stored for traceability. 
-
-## 📈 Evaluation Results
-
-The system was evaluated in two settings: **CPU (confusion matrix visualization)** and **GPU (JSON-based metrics report)**.
+- **NIK-based Search:** Reference face retrieval using mock NIK database
+- **Metadata Storage:** Timestamp, CCTV location, and detection evidence
 
 ---
 
-### 1. Confusion Matrix (CPU)
-The confusion matrix below illustrates the classification results of the **Face Recognition model** when executed on CPU.  
+## 📈 Performance Evaluation
 
-Each row represents the **true class**, and each column represents the **predicted class**.  
-A perfect diagonal line indicates that the classifier correctly recognized all faces without misclassifications.
+### Confusion Matrix (CPU Execution)
+![Confusion Matrix](https://github.com/user-attachments/assets/46be7671-8ed9-427f-b726-b354085f4026)
 
-<img width="1600" height="900" alt="evaluation_report" src="https://github.com/user-attachments/assets/46be7671-8ed9-427f-b726-b354085f4026" />
+*The confusion matrix demonstrates perfect classification performance with no misclassifications*
 
-*Result:* The confusion matrix shows perfect classification performance, with no off-diagonal misclassifications.
-
----
-
-### 2. Metrics Report (GPU)
-On GPU execution, the system was able to achieve **perfect performance** with the following metrics:
-
+### Metrics Report (GPU Execution)
 ```json
 {
   "accuracy": 1.0,
@@ -128,27 +97,100 @@ On GPU execution, the system was able to achieve **perfect performance** with th
     "f1": 1.0
   },
   "per_class": {
-    "abyan": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 252
-    },
-    "agi": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 253
-    },
-    "apis": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "support": 252
-    }
+    "abyan": { "precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 252 },
+    "agi": { "precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 253 },
+    "apis": { "precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 252 }
   }
 }
 ```
 
-## Conclusion
-This project successfully demonstrates the integration of advanced computer vision techniques for automatically identifying suspect locations through CCTV. The system employs YOLOv10s for Face Detection, ensuring accurate identification of human faces in real-time video streams. Once a face is detected, FaceNet combined with SVM is used for Face Recognition, enabling reliable verification of suspect identities based on embeddings comparison. The automated workflow reduces the manual workload of law enforcement officers, increases tracking efficiency, and provides timely information on suspect locations. Moreover, the system holds strong potential for future development, including large-scale deployment across CCTV networks and integration with national databases to further enhance public safety.
+---
+
+## 🖥️ Web Application Features
+
+| Feature | Description |
+|---------|-------------|
+| **Home Page** | System overview and capabilities |
+| **CCTV Page** | Real-time streaming from multiple cameras with location selection |
+| **Search Page** | NIK-based search for suspect identification |
+| **History Page** | Complete detection records with filtering options |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.8+
+- CUDA-enabled GPU (recommended)
+- Web camera or CCTV feed access
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/agik20/criminal-suspect-localization.git
+cd criminal-suspect-localization
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/MacOS
+# or
+venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Usage
+```bash
+# Run the web application
+python app.py
+
+# Start face detection and recognition
+python detect.py --source 0  # webcam
+# or
+python detect.py --source rtsp://camera_feed_url  # CCTV stream
+```
+
+---
+
+## 📊 Results Interpretation
+
+The system achieves perfect classification performance across all evaluation metrics:
+- **100% accuracy** in face recognition tasks
+- **Perfect precision and recall** for all tested classes
+- **Robust performance** on both CPU and GPU environments
+
+---
+
+## 🔮 Future Enhancements
+
+- Integration with larger CCTV networks
+- Advanced tracking algorithms across multiple cameras
+- Enhanced database synchronization capabilities
+- Mobile application for field officers
+
+---
+
+## 📝 License
+
+This project is developed for academic purposes. Commercial use requires proper authorization and compliance with privacy regulations.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions to enhance this project:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Submit a pull request
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you find it useful!**
+
+*For questions and support, please open an issue in the GitHub repository*
+
+</div>
