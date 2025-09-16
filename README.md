@@ -35,16 +35,20 @@ This project presents an AI-based surveillance system for automatically locating
 ## 🏗️ System Architecture
 
 ```mermaid
-flowchart TD
-    A[Input Suspect NIK] --> B[Searching NIK in Database]
-    B --> C[Retrieve Reference Face by NIK]
-    D[Streaming CCTV] --> E[Face Detection]
-    E --> F{Face Recognition<br>Does Detected Face Match Reference Face?}
-    C --> F
-    F --|Match| G[Store Matched Face + Location Info]
-    F --|Not Match| E
-    G --> H[Display Matched Face and Location on Website]
-    H --> I[Finish]
+graph TD
+    A[User Input: NIK] --> B[Database Retrieval]
+    B --> C[Reference Image]
+    C --> D[FaceNet Embeddings]
+    D --> E[SVM Classification]
+    
+    F[CCTV Stream] --> G[YOLOv10s Face Detection]
+    G --> H[Detected Faces]
+    H --> I[FaceNet Embeddings]
+    I --> E
+    
+    E --> J[Match Decision]
+    J --> K[Store Metadata]
+    K --> L[Web Interface Output]
 ```
 
 ## ⚙️ Technical Implementation
